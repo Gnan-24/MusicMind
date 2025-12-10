@@ -1,0 +1,83 @@
+:root {
+  --bg-primary: hsl(240, 10%, 8%);
+  --bg-secondary: hsl(240, 10%, 12%);
+  --accent-color: hsl(150, 60%, 50%); /* Spotify-ish Green */
+  --accent-glow: hsla(150, 60%, 50%, 0.3);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsla(0, 0%, 100%, 0.7);
+  
+  --glass-bg: hsla(0, 0%, 100%, 0.03);
+  --glass-border: hsla(0, 0%, 100%, 0.08);
+  --glass-highlight: hsla(0, 0%, 100%, 0.1);
+  
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glass-border);
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
