@@ -1,18 +1,25 @@
 :root {
-  --bg-primary: hsl(240, 10%, 8%);
-  --bg-secondary: hsl(240, 10%, 12%);
-  --accent-color: hsl(150, 60%, 50%); /* Spotify-ish Green */
-  --accent-glow: hsla(150, 60%, 50%, 0.3);
-  --text-primary: hsl(0, 0%, 100%);
-  --text-secondary: hsla(0, 0%, 100%, 0.7);
-  
-  --glass-bg: hsla(0, 0%, 100%, 0.03);
-  --glass-border: hsla(0, 0%, 100%, 0.08);
-  --glass-highlight: hsla(0, 0%, 100%, 0.1);
-  
+  --bg-primary: #000000;
+  /* True Black for seamless blend */
+  --bg-secondary: #050510;
+  /* Very deep indigo for sticky headers */
+  --bg-gradient: linear-gradient(135deg, #000000 0%, #050215 100%);
+  /* Subtle deep vibe */
+  --accent-color: #1DB954;
+  /* Spotify Green remaining as accent */
+  --accent-glow: rgba(29, 185, 84, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+
+  /* Framer-like Glass */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  /* Higher contrast border */
+  --glass-highlight: rgba(255, 255, 255, 0.08);
+
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
-  
-  --ease-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  --ease-out: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 * {
@@ -23,15 +30,16 @@
 
 body {
   font-family: var(--font-main);
-  background-color: var(--bg-primary);
+  background: var(--bg-primary);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
   color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
 }
 
 #root {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

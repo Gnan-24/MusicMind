@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TiltCard from './TiltCard';
 import './Dashboard.css';
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -44,40 +46,27 @@ const Dashboard = () => {
             </nav>
 
             <main className="dashboard-grid">
-                {/* Top 10 Songs */}
-                <TiltCard className="glass-panel section-card songs-section">
-                    <h3>Top 10 Songs</h3>
-                    <ul className="song-list">
-                        {topSongs.map((song, i) => (
-                            <li key={song.id} className="song-item" style={{ animationDelay: `${i * 0.1}s` }}>
-                                <span className="rank">{i + 1}</span>
-                                <div className="song-info">
-                                    <div className="song-title">{song.title}</div>
-                                    <div className="song-artist">{song.artist}</div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </TiltCard>
-
-                {/* Right Column */}
-                <div className="right-column">
-                    {/* Genres */}
-                    <TiltCard className="glass-panel section-card genres-section">
-                        <h3>Top Genres</h3>
-                        <div className="genre-bars">
-                            {genres.map(g => (
-                                <div key={g.name} className="genre-row">
-                                    <span>{g.name}</span>
-                                    <div className="progress-bar-bg">
-                                        <div className="progress-bar-fill" style={{ width: `${g.percent}%` }}></div>
-                                    </div>
-                                </div>
-                            ))}
+                {/* Music Insights (Consolidated) - Top: 100px */}
+                <div className="section-wrapper" style={{ position: 'sticky', top: '100px', zIndex: 1, width: '1000px' }}>
+                    <TiltCard className="glass-panel section-card insights-card">
+                        <h3>Music Insights</h3>
+                        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '60%' }}>
+                            <div style={{ textAlign: 'center' }}>
+                                <h4 style={{ fontSize: '3rem', color: 'var(--accent-color)', margin: 0 }}>Top Songs</h4>
+                                <p style={{ color: 'var(--text-secondary)' }}>Your most played hits</p>
+                            </div>
+                            <div style={{ width: '1px', height: '100px', background: 'var(--glass-border)' }}></div>
+                            <div style={{ textAlign: 'center' }}>
+                                <h4 style={{ fontSize: '3rem', color: '#a29bfe', margin: 0 }}>Genres</h4>
+                                <p style={{ color: 'var(--text-secondary)' }}>Your vibe profile</p>
+                            </div>
                         </div>
+                        <button className="explore-btn" onClick={() => navigate('/music-insights')}>View Full Insights</button>
                     </TiltCard>
+                </div>
 
-                    {/* Friends Comparison */}
+                {/* Friends Comparison - Top: 180px */}
+                <div className="section-wrapper" style={{ position: 'sticky', top: '180px', zIndex: 3, width: '1000px' }}>
                     <TiltCard className="glass-panel section-card friends-section">
                         <h3>Compare with Friends</h3>
                         <div className="friends-list">
@@ -89,8 +78,10 @@ const Dashboard = () => {
                             ))}
                         </div>
                     </TiltCard>
+                </div>
 
-                    {/* Recommendations */}
+                {/* Recommendations - Top: 220px */}
+                <div className="section-wrapper" style={{ position: 'sticky', top: '220px', zIndex: 4, width: '1000px' }}>
                     <TiltCard className="glass-panel section-card recs-section">
                         <h3>Recommended For You</h3>
                         <ul className="recs-list">

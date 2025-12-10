@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import GoogleEyes from './GoogleEyes';
+import FloatingVinyl from './FloatingVinyl';
 import './LandingPage.css';
 
 const TypewriterText = ({ text, delay = 100, onComplete }) => {
@@ -33,8 +33,9 @@ const LandingPage = () => {
 
     return (
         <div className="landing-container">
+            <FloatingVinyl />
             <div className="hero-content">
-                <GoogleEyes />
+
                 <h1 className="hero-title">
                     <TypewriterText
                         text="Discover your sound."
