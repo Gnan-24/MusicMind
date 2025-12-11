@@ -50,17 +50,17 @@
 
 /* Stacking Cards */
 .section-card {
-    width: 1000px;
     /* Fixed wide width */
-    height: 500px;
     /* Uniform height */
-    position: sticky;
-    top: 100px;
-    /* Base sticky position */
+    width: 880px;
+    /* Fixed wide width */
+    height: 404px;
+    /* Uniform height */
+    /* Position handled by wrapper to avoid double-sticky bug */
     background: #050505;
     border: 1px solid var(--glass-border);
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-    margin-bottom: 2rem;
+    margin-bottom: 7rem;
     overflow: hidden;
     /* Hide excess content */
     display: flex;

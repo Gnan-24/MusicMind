@@ -47,7 +47,7 @@ const Dashboard = () => {
 
             <main className="dashboard-grid">
                 {/* Music Insights (Consolidated) - Top: 100px */}
-                <div className="section-wrapper" style={{ position: 'sticky', top: '100px', zIndex: 1, width: '1000px' }}>
+                <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 1, width: '884px' }}>
                     <TiltCard className="glass-panel section-card insights-card">
                         <h3>Music Insights</h3>
                         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '60%' }}>
@@ -66,7 +66,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Friends Comparison - Top: 180px */}
-                <div className="section-wrapper" style={{ position: 'sticky', top: '180px', zIndex: 3, width: '1000px' }}>
+                <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 2, width: '884px' }}>
                     <TiltCard className="glass-panel section-card friends-section">
                         <h3>Compare with Friends</h3>
                         <div className="friends-list">
@@ -81,7 +81,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Recommendations - Top: 220px */}
-                <div className="section-wrapper" style={{ position: 'sticky', top: '220px', zIndex: 4, width: '1000px' }}>
+                <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 3, width: '884px' }}>
                     <TiltCard className="glass-panel section-card recs-section">
                         <h3>Recommended For You</h3>
                         <ul className="recs-list">

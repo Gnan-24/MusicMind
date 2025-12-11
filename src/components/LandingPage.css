@@ -73,3 +73,31 @@
         transform: translateY(0);
     }
 }
+
+/* Block Cursor */
+.cursor {
+    display: inline-block;
+    width: 0.4em;
+    /* Slightly narrower to match typical character width */
+    height: 0.85em;
+    /* Matches cap height better than 1em */
+    background-color: var(--text-primary);
+    animation: blink 1s step-end infinite;
+    vertical-align: baseline;
+    /* Better alignment with text */
+    margin-left: 2px;
+    margin-bottom: -0.1em;
+    /* Slight offset to align with baseline */
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}

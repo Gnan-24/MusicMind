@@ -12,14 +12,14 @@
     overflow: hidden;
 }
 
-.tilt-card:hover {
+/*.tilt-card:hover {
     z-index: 10;
     border-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 60px -12px rgba(0, 0, 0, 0.6);
 }
 
 /* Inner sheen effect */
-.tilt-card::after {
+/*.tilt-card::after {
     content: '';
     position: absolute;
     top: 0;
@@ -33,4 +33,4 @@
 
 .tilt-card:hover::after {
     transform: translateX(100%);
-}
+}*/

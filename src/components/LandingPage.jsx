@@ -19,7 +19,12 @@ const TypewriterText = ({ text, delay = 100, onComplete }) => {
         }
     }, [currentIndex, delay, text, onComplete]);
 
-    return <span>{displayText}</span>;
+    return (
+        <span>
+            {displayText}
+            <span className="cursor"></span>
+        </span>
+    );
 };
 
 const LandingPage = () => {
