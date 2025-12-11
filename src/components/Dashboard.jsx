@@ -1,15 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TiltCard from './TiltCard';
+import HeroSection from './HeroSection';
 import './Dashboard.css';
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
+    const [activeSection, setActiveSection] = useState(0);
+    const vinylRef = React.useRef(null);
 
     useEffect(() => {
         setIsVisible(true);
-    }, []);
+        const handleScroll = () => {
+            const currentScroll = window.scrollY;
+
+            // Direct DOM manipulation for smooth vinyl animation (No Re-renders!)
+            if (vinylRef.current) {
+                const rotation = 20 + currentScroll * 0.05;
+                const scale = 1 + activeSection * 0.05;
+                vinylRef.current.style.transform = `rotate(${rotation}deg) scale(${scale})`;
+            }
+
+            // Determine active section (Throttle this if needed, but state updates are less frequent here)
+            if (currentScroll < 400) {
+                setActiveSection(0);
+            } else if (currentScroll < 900) {
+                setActiveSection(1);
+            } else {
+                setActiveSection(2);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [activeSection]); // Depend on activeSection for correct scale calc inside closure
 
     const topSongs = Array(10).fill(null).map((_, i) => ({
         id: i,
@@ -18,6 +43,7 @@ const Dashboard = () => {
         cover: `https://via.placeholder.com/50?text=${i + 1}`
     }));
 
+    // ... (Data Arrays - kept same)
     const genres = [
         { name: 'Pop', percent: 80 },
         { name: 'Rock', percent: 60 },
@@ -40,28 +66,43 @@ const Dashboard = () => {
 
     return (
         <div className={`dashboard-container ${isVisible ? 'visible' : ''}`}>
+            {/* Ambient Background Layer */}
+            <div
+                className="dashboard-background-layer"
+                data-section={activeSection}
+            >
+                <div className="dashboard-noise"></div>
+                <div className="dashboard-orb orb-1"></div>
+                <div className="dashboard-orb orb-2"></div>
+                <div className="dashboard-orb orb-3"></div>
+                {/* Vinyl removed per user request */}
+            </div>
+
             <nav className="glass-panel navbar">
                 <h2 className="logo">MusicAnalyzer</h2>
                 <div className="user-profile">Hello, Music Lover</div>
             </nav>
 
+            <HeroSection />
+
             <main className="dashboard-grid">
-                {/* Music Insights (Consolidated) - Top: 100px */}
+                {/* Music Insights (Consolidated) - Top: 100px (+ 100vh offset mostly) */}
                 <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 1, width: '884px' }}>
                     <TiltCard className="glass-panel section-card insights-card">
-                        <h3>Music Insights</h3>
-                        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', height: '60%' }}>
-                            <div style={{ textAlign: 'center' }}>
-                                <h4 style={{ fontSize: '3rem', color: 'var(--accent-color)', margin: 0 }}>Top Songs</h4>
-                                <p style={{ color: 'var(--text-secondary)' }}>Your most played hits</p>
-                            </div>
-                            <div style={{ width: '1px', height: '100px', background: 'var(--glass-border)' }}></div>
-                            <div style={{ textAlign: 'center' }}>
-                                <h4 style={{ fontSize: '3rem', color: '#a29bfe', margin: 0 }}>Genres</h4>
-                                <p style={{ color: 'var(--text-secondary)' }}>Your vibe profile</p>
-                            </div>
+                        {/* Grunge Background Layer */}
+                        <div className="card-bg-layer" style={{
+                            backgroundImage: 'url(/src/assets/card_insights_bg.png)',
+                            opacity: 0.6
+                        }}></div>
+
+                        <div className="card-content-relative">
+                            <h3>Music Insights</h3>
+
+                            {/* Empty space for the background graphic to shine */}
+                            <div style={{ flex: 1 }}></div>
+
+                            <button className="explore-btn" onClick={() => navigate('/music-insights')}>View Full Insights</button>
                         </div>
-                        <button className="explore-btn" onClick={() => navigate('/music-insights')}>View Full Insights</button>
                     </TiltCard>
                 </div>
 

@@ -1,9 +1,11 @@
 .dashboard-container {
-    padding-top: 100px;
+    padding-top: 0;
+    /* Removed fixed padding, HeroSection handles top space */
     min-height: 100vh;
     /* Ensure parent allows scrolling for sticky to work if needed, 
      but usually body scroll is enough. */
-    padding-bottom: 100px;
+    padding-bottom: 60vh;
+    /* Extra space to allow the last card to scroll to the top sticky position */
 }
 
 .dashboard-container.visible {
@@ -31,38 +33,30 @@
     border: 1px solid var(--glass-border);
 }
 
-.logo {
-    font-weight: 700;
-    color: var(--accent-color);
-}
-
 .dashboard-grid {
+    position: relative;
+    z-index: 2;
+    /* Ensure content sits above the new Z-0 background */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4rem;
-    /* Initial gap */
+    gap: 0;
+    /* Removed gap for tight stacking */
     max-width: 900px;
-    /* Wider cards */
     margin: 0 auto;
     padding: 0 2rem;
 }
 
 /* Stacking Cards */
 .section-card {
-    /* Fixed wide width */
-    /* Uniform height */
     width: 880px;
-    /* Fixed wide width */
     height: 404px;
-    /* Uniform height */
-    /* Position handled by wrapper to avoid double-sticky bug */
     background: #050505;
     border: 1px solid var(--glass-border);
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-    margin-bottom: 7rem;
+    margin-bottom: 2rem;
+    /* Reduced from 7rem to small breathing room */
     overflow: hidden;
-    /* Hide excess content */
     display: flex;
     flex-direction: column;
 }
@@ -110,6 +104,105 @@
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
+    position: relative;
+    /* Ensure text is above bg */
+    z-index: 2;
+}
+
+/* Background Image for Insights Card */
+.insights-card {
+    position: relative;
+    background: #050505;
+    /* Fallback */
+}
+
+.insights-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/insights-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.75;
+    /* 70-80% opacity */
+    z-index: 0;
+    mix-blend-mode: luminosity;
+    /* Keeps it subtle/monochrome */
+}
+
+.insights-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* 10-40% Dark overlay for text contrast */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Ensure content sits above overlay */
+.insights-card>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Card Background Handling */
+.section-card {
+    position: relative;
+}
+
+.card-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    mix-blend-mode: luminosity;
+    /* Grayscale blend for grunge feel */
+    filter: contrast(1.2) brightness(0.8);
+}
+
+.card-content-relative {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Poster Slogan Typography */
+.poster-slogan {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 0.85;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.poster-slogan span {
+    font-family: 'Inter', sans-serif;
+    /* Or a bolder display font if available */
+    font-weight: 900;
+    font-size: 3.5rem;
+    color: rgba(255, 255, 255, 0.15);
+    /* Subtle watermark style */
+    text-transform: uppercase;
+    letter-spacing: -2px;
 }
 
 /* Internal Layouts (Grid inside cards if needed) */
@@ -147,4 +240,122 @@
     background: var(--bg-secondary);
     padding: 1rem;
     border-radius: 12px;
+}
+
+/* Dashboard Specific Background */
+.dashboard-background-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    /* Changed from -1 to 0 to sit ABOVE the body background */
+    overflow: hidden;
+    background: linear-gradient(135deg, #020205 0%, #150a25 100%);
+    /* Default: Deep Purple */
+    transition: background 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    /* ultra smooth transition */
+}
+
+/* Dynamic Scroll Variants */
+/* Dynamic Scroll Variants REMOVED per user request */
+/* Background remains constant (defined in .dashboard-background-layer) */
+
+.dashboard-noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/noise_texture.png');
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.dashboard-vinyl-bg {
+    position: absolute;
+    top: -15%;
+    right: -15%;
+    width: 70vw;
+    height: auto;
+    opacity: 0.4;
+    /* Increased from 0.15 */
+    filter: blur(40px);
+    /* Slightly sharper */
+    transform: rotate(20deg);
+    pointer-events: none;
+    /* mix-blend-mode: screen; REMOVED to ensure visibility on dark background */
+    animation: vinyl-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes vinyl-pulse {
+    from {
+        transform: rotate(20deg) scale(1);
+        opacity: 0.4;
+    }
+
+    to {
+        transform: rotate(25deg) scale(1.05);
+        opacity: 0.5;
+    }
+}
+
+/* Floating Orbs */
+.dashboard-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    animation: float-orb 20s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    top: 20%;
+    left: 10%;
+    background: radial-gradient(circle, rgba(138, 43, 226, 0.2), transparent);
+    animation-duration: 25s;
+}
+
+.orb-2 {
+    width: 300px;
+    height: 300px;
+    bottom: 10%;
+    left: 30%;
+    background: radial-gradient(circle, rgba(29, 185, 84, 0.15), transparent);
+    animation-duration: 30s;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 500px;
+    height: 500px;
+    top: 50%;
+    right: 20%;
+    background: radial-gradient(circle, rgba(65, 105, 225, 0.15), transparent);
+    animation-duration: 35s;
+    animation-delay: -10s;
+}
+
+@keyframes float-orb {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-30px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(20px, 40px) scale(1.05);
+    }
 }
