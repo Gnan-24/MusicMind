@@ -4,6 +4,9 @@ import TiltCard from './TiltCard';
 import HeroSection from './HeroSection';
 import './Dashboard.css';
 
+import friendsBg from '../assets/card_friends_bg_final.png';
+import recsBg from '../assets/card_recs_bg.png';
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
@@ -113,36 +116,24 @@ const Dashboard = () => {
 
                 {/* Friends Comparison - Top: 180px */}
                 <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 2, width: '884px' }}>
-                    <TiltCard className="glass-panel section-card friends-section">
+                    <TiltCard
+                        className="glass-panel section-card friends-card"
+                        style={{ '--friends-bg': `url(${friendsBg})` }}
+                    >
                         <h3>Compare with Friends</h3>
-                        <div className="friends-list">
-                            {friends.map(f => (
-                                <div key={f.name} className="friend-item">
-                                    <span>{f.name}</span>
-                                    <span className="match-score">{f.match} Match</span>
-                                </div>
-                            ))}
-                        </div>
+                        {/* Empty space for background */}
+                        <div style={{ flex: 1 }}></div>
+                        <button className="explore-btn">Find Friends</button>
                     </TiltCard>
                 </div>
 
                 {/* Recommendations - Top: 220px */}
                 <div className="section-wrapper" style={{ position: 'sticky', top: '120px', zIndex: 3, width: '884px' }}>
-                    <TiltCard className="glass-panel section-card recs-section">
-                        <h3>Recommended For You</h3>
-                        <ul className="recs-list">
-                            {recommendations.map(r => (
-                                <li key={r.id} className="rec-item">
-                                    <div className="rec-info">
-                                        <div className="song-title">{r.title}</div>
-                                        <div className="song-artist">{r.artist}</div>
-                                    </div>
-                                    <a href={r.link} target="_blank" rel="noopener noreferrer" className="spotify-link">
-                                        Open
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                    <TiltCard
+                        className="glass-panel section-card recs-section"
+                        style={{ '--recs-bg': `url(${recsBg})` }}
+                    >
+                        {/* Pure Image Card */}
                     </TiltCard>
                 </div>
             </main>
