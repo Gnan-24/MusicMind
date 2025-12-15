@@ -13,8 +13,8 @@
 }
 
 .navbar {
-    position: fixed;
-    top: 1rem;
+    position: absolute;
+    top: 2.5rem;
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -25,12 +25,50 @@
     justify-content: space-between;
     padding: 0 2rem;
     z-index: 1000;
-    /* High z-index to stay above stacking cards */
-    background: rgba(5, 5, 5, 0.8);
-    /* Semi-transparent background for readability */
-    backdrop-filter: blur(10px);
-    border-radius: 30px;
-    border: 1px solid var(--glass-border);
+    /* Transparent background per request */
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+    /* Increased gap to separate words clearly */
+    align-items: center;
+}
+
+.nav-item {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    position: relative;
+    text-transform: capitalize;
+    /* Ensure they look like headings/names */
+}
+
+.nav-item:hover {
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    color: var(--accent-color);
+    /* Spotify Green */
+}
+
+/* Dash underline for active item */
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-glow);
+    border-radius: 2px;
 }
 
 .dashboard-grid {

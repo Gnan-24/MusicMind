@@ -78,9 +78,14 @@ const Dashboard = () => {
                 {/* Vinyl removed per user request */}
             </div>
 
-            <nav className="glass-panel navbar">
-                <h2 className="logo">MusicAnalyzer</h2>
-                <div className="user-profile">Hello, Music Lover</div>
+            <nav className="navbar">
+                <h2 className="logo">MusicMind</h2>
+                <div className="nav-links">
+                    <span className="nav-item active">Dashboard</span>
+                    <span className="nav-item">Friends</span>
+                    <span className="nav-item">Recommendations</span>
+                    <span className="nav-item">Profile</span>
+                </div>
             </nav>
 
             <HeroSection />
